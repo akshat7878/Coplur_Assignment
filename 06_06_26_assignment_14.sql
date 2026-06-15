@@ -9473,6 +9473,7 @@ FROM customer_transactions
 WHERE txn_type = 'deposit'
 GROUP BY customer_id) temp;
 
+
 -- For each month - how many Data Bank customers make more than 1 deposit and either 1 purchase or 1 withdrawal in a single month?
 SELECT month_num, COUNT(*) AS customer_count FROM(
     SELECT customer_id, MONTH(txn_date) AS month_num,
@@ -9485,3 +9486,5 @@ SELECT month_num, COUNT(*) AS customer_count FROM(
 WHERE deposit_cnt > 1 AND (purchase_cnt >= 1 OR withdrawal_cnt >= 1)
 GROUP BY month_num
 ORDER BY month_num;
+
+SELECT* FROM customer_nodes PARTITION BY customer_id;
